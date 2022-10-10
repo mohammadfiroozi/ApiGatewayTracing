@@ -1,0 +1,53 @@
+{
+  "Routes": [
+
+    {
+      "HttpHandlerOptions": {
+        "UseTracing": true
+      },
+      "DownstreamPathTemplate": "/api/User/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7262"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetUserById/{id}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 30,
+        "Region": "custom"
+      }
+    },
+    {
+   
+      "DownstreamPathTemplate": "/api/Products",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7247"
+        }
+      ],
+
+      "UpstreamPathTemplate": "/Products",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+        ],
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1,
+        "HttpStatusCode": 429
+      }
+    }
+  ],
+  "DangerousAcceptAnyServerCertificateValidator": true,
+
+}
